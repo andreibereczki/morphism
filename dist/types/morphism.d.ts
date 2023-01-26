@@ -33,7 +33,7 @@ import { Rule } from './validation/validators/types';
  */
 declare function morphism<TSchema = Schema<DestinationFromSchema<Schema>, SourceFromSchema<Schema>>, Source extends SourceFromSchema<TSchema> = SourceFromSchema<TSchema>>(schema: TSchema, data: Source[]): DestinationFromSchema<TSchema>[];
 declare function morphism<TSchema = Schema<DestinationFromSchema<Schema>, SourceFromSchema<Schema>>, Source extends SourceFromSchema<TSchema> = SourceFromSchema<TSchema>>(schema: TSchema, data: Source): DestinationFromSchema<TSchema>;
-declare function morphism<TSchema = Schema<DestinationFromSchema<Schema>, SourceFromSchema<Schema>>>(schema: TSchema): Mapper<TSchema>;
+declare function morphism<TSchema extends Schema<DestinationFromSchema<Schema>, SourceFromSchema<Schema>> | StrictSchema<DestinationFromSchema<Schema>, SourceFromSchema<Schema>>>(schema: TSchema): Mapper<TSchema>;
 declare function morphism<TSchema extends Schema, TDestination>(schema: TSchema, items: null, type: Constructable<TDestination>): Mapper<TSchema, TDestination>;
 declare function morphism<TSchema = Schema<DestinationFromSchema<Schema>, SourceFromSchema<Schema>>, Target = never, Source extends SourceFromSchema<TSchema> = SourceFromSchema<TSchema>>(schema: TSchema, items: Source, type: Constructable<Target>): Target;
 declare function morphism<TSchema = Schema<DestinationFromSchema<Schema>, SourceFromSchema<Schema>>, Target = never, Source extends SourceFromSchema<TSchema> = SourceFromSchema<TSchema>>(schema: TSchema, items: Source[], type: Constructable<Target>): Target[];

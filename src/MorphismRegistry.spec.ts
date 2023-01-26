@@ -1,4 +1,4 @@
-import Morphism from './morphism';
+import Morphism, { Schema } from './morphism';
 import { User, MockData } from './utils-test';
 
 describe('Mappers Registry', function() {
@@ -30,7 +30,7 @@ describe('Mappers Registry', function() {
     Morphism.register(User);
   });
   it('should throw an exception when using Registration function without parameters', function() {
-    expect(() => Morphism.register(null as any, null)).toThrow();
+    expect(() => Morphism.register(null as any, null as unknown as Schema)).toThrow();
   });
 
   it('should throw an exception when trying to register a mapper type more than once', function() {

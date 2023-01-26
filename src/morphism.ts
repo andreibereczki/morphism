@@ -167,7 +167,7 @@ function morphism<
   Source extends SourceFromSchema<TSchema> = SourceFromSchema<TSchema>
 >(schema: TSchema, data: Source): DestinationFromSchema<TSchema>;
 
-function morphism<TSchema = Schema<DestinationFromSchema<Schema>, SourceFromSchema<Schema>>>(schema: TSchema): Mapper<TSchema>; // morphism({}) => mapper(S) => T
+function morphism<TSchema extends Schema<DestinationFromSchema<Schema>, SourceFromSchema<Schema>> | StrictSchema<DestinationFromSchema<Schema>, SourceFromSchema<Schema>>>(schema: TSchema): Mapper<TSchema>;
 
 function morphism<TSchema extends Schema, TDestination>(
   schema: TSchema,

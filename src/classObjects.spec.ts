@@ -186,7 +186,7 @@ describe('Class Objects', () => {
       const source = { a: 'auto', b: 1, c: 'normal' };
 
       const schema = createSchema({ c: 'c' }, { class: { automapping: false } });
-      Morphism.register(Target, schema);
+      Morphism.register(Target, schema as any);
       const result = Morphism.map(Target, source);
 
       expect(result).toEqual({ c: 'normal' });

@@ -110,8 +110,8 @@ export interface SchemaOptions<Target = any> {
  * @param {StrictSchema} schema
  * @param {SchemaOptions<Target>} [options]
  */
-export function createSchema<Target = any, Source = any>(schema: StrictSchema<Target, Source>, options?: SchemaOptions<Target>) {
-  if (options && !isEmptyObject(options)) (schema as any)[SCHEMA_OPTIONS_SYMBOL] = options;
+export function createSchema<Target = any, Source = any>(schema: StrictSchema<Target, Source>, options?: SchemaOptions<Target>): StrictSchema<Target, Source> {
+  if (options && !isEmptyObject(options)) schema[SCHEMA_OPTIONS_SYMBOL] = options;
   return schema;
 }
 
