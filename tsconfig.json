@@ -14,8 +14,17 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strictPropertyInitialization": false,
-    "downlevelIteration": true
+    "downlevelIteration": true,
+    "allowSyntheticDefaultImports": true
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["dist"]
+  "exclude": ["dist"],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs",
+      "target": "es5",
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true
+    }
+  }
 }

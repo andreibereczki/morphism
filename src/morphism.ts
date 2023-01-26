@@ -89,7 +89,7 @@ function checkIfValidationShouldThrow<Target>(options: SchemaOptions<Target>, fi
   }
 }
 
-function transformItems<T, TSchema extends Schema<T | {}>>(schema: TSchema, type?: Constructable<T>) {
+function transformItems<T, TSchema extends Schema<T>>(schema: TSchema, type?: Constructable<T>) {
   const options = MorphismSchemaTree.getSchemaOptions<T>(schema);
   let tree: MorphismSchemaTree<any, any>;
   if (type && options.class && options.class.automapping) {

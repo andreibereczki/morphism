@@ -2,18 +2,17 @@ import path from 'path';
 import webpack from 'webpack';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import NodemonPlugin from 'nodemon-webpack-plugin';
-import ModuleDependencyWarning from 'webpack/lib/ModuleDependencyWarning';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 const nodeEnv = process.env.NODE_ENV || 'development';
 const isProd = nodeEnv === 'production';
 const shouldAnalyzeBundle = process.env.WEBPACK_ANALYZE;
 class IgnoreNotFoundExportPlugin {
-  apply(compiler) {
+  apply(compiler: webpack.Compiler) {
     const messageRegExp = /export '.*'( \(reexported as '.*'\))? was not found in/;
-    function doneHook(stats) {
+    function doneHook(stats: webpack.Stats) {
       stats.compilation.warnings = stats.compilation.warnings.filter(function(warn) {
-        if (warn instanceof ModuleDependencyWarning && messageRegExp.test(warn.message)) {
+        if (warn instanceof webpack.WebpackError && messageRegExp.test(warn.message)) {
           return false;
         }
         return true;
@@ -21,8 +20,6 @@ class IgnoreNotFoundExportPlugin {
     }
     if (compiler.hooks) {
       compiler.hooks.done.tap('IgnoreNotFoundExportPlugin', doneHook);
-    } else {
-      compiler.plugin('done', doneHook);
     }
   }
 }
@@ -47,15 +44,15 @@ const webpackconfiguration: webpack.Configuration = {
   },
   plugins: [
     new ForkTsCheckerWebpackPlugin({
-      async: false,
-      checkSyntacticErrors: true,
-      reportFiles: ['**', '!**/*.json', '!**/__tests__/**', '!**/?(*.)(spec|test).*'],
-      silent: true,
+      async: false
     }),
     new NodemonPlugin(),
-    new IgnoreNotFoundExportPlugin(),
-    shouldAnalyzeBundle ? new BundleAnalyzerPlugin({ generateStatsFile: true }) : null,
+    new IgnoreNotFoundExportPlugin()
   ].filter(plugin => plugin),
 };
+
+if (shouldAnalyzeBundle) {
+  webpackconfiguration.plugins?.push(new BundleAnalyzerPlugin({ generateStatsFile: true }));
+}
 
 export default webpackconfiguration;

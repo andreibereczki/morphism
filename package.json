@@ -8,7 +8,7 @@
   "scripts": {
     "build": "run-p build:js build:types",
     "start": "run-p watch:*",
-    "build:js": "TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack --mode=production",
+    "build:js": "webpack --mode=production",
     "watch:js": "yarn run build:js -w --display \"errors-only\"",
     "build:types": "tsc -p tsconfig.prod.json --emitDeclarationOnly",
     "watch:types": "yarn run build:types  -w >/dev/null",
@@ -18,8 +18,8 @@
     "semantic-release": "semantic-release",
     "docs": "typedoc",
     "docs:deploy": "now ./docs/typedoc -A ../../now.json --public --team $TEAM_NAME --token $NOW_TOKEN && now alias --team $TEAM_NAME --token $NOW_TOKEN",
-    "analyze-bundle:dev": "WEBPACK_ANALYZE=true TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack",
-    "analyze-bundle:prod": "WEBPACK_ANALYZE=true TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack  --mode=production"
+    "analyze-bundle:dev": "WEBPACK_ANALYZE=true webpack",
+    "analyze-bundle:prod": "WEBPACK_ANALYZE=true webpack  --mode=production"
   },
   "release": {
     "branches": [
@@ -84,8 +84,6 @@
     "tslint": "^6.1.3",
     "tslint-loader": "^3.6.0",
     "typedoc": "^0.22.8",
-    "typedoc-plugin-external-module-name": "^4.0.6",
-    "typedoc-plugin-internal-external": "^2.2.0",
     "typescript": "^4.4.4",
     "validator": "^13.7.0",
     "webpack": "5.64.0",

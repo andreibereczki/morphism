@@ -2,8 +2,8 @@ import { Validation } from './Validation';
 import { createSchema } from '../MorphismTree';
 import { morphism, reporter, ValidatorError } from '../morphism';
 import { ValidationError, defaultFormatter } from './reporter';
-import { isEmail } from 'validator';
-import { isFunction, isString } from '../helpers';
+import validator from 'validator';
+import { isString } from '../helpers';
 import { Rule } from './validators/types';
 import { LinkedList } from './validators/LinkedList';
 import { ValidatorValidateResult, ValidateFunction } from '../types';
@@ -98,7 +98,7 @@ describe('Validation', () => {
       t1: {
         path: 's1',
         validation: input => {
-          if (isEmail(input.value)) {
+          if (validator.isEmail(input.value)) {
             return { value: input.value };
           } else {
             return {
