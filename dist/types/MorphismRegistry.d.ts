@@ -70,7 +70,7 @@ export declare class MorphismRegistry implements IMorphismRegistry {
      * @param schema Structure-preserving object from a source data towards a target data.
      *
      */
-    register<Target, TSchema>(type: Constructable<Target>, schema?: TSchema): Mapper<TSchema, Target>;
+    register<Target, TSchema extends Schema | StrictSchema>(type: Constructable<Target>, schema?: TSchema): Mapper<TSchema, Target>;
     /**
      * Transform any input in the specified Class
      *

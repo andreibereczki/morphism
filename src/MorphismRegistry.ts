@@ -76,7 +76,7 @@ export class MorphismRegistry implements IMorphismRegistry {
    * @param schema Structure-preserving object from a source data towards a target data.
    *
    */
-  register<Target, TSchema>(type: Constructable<Target>, schema?: TSchema) {
+  register<Target, TSchema extends Schema | StrictSchema>(type: Constructable<Target>, schema?: TSchema) {
     if (!type && !schema) {
       throw new Error('type paramater is required when you register a mapping');
     } else if (this.exists(type)) {
